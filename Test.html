@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Відправка запиту на сервер</title>
+</head>
+<body>
+
+<button id="sendRequestBtn">Відправити запит</button>
+
+<script>
+document.getElementById('sendRequestBtn').addEventListener('click', function() {
+  const data = {
+    id: 2,
+    name: "John"
+  };
+  
+  const url = 'localhost:8080';
+  
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  };
+  
+  fetch(url, requestOptions)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Відповідь з сервера:', data);
+    })
+    .catch(error => {
+      console.error('Виникла помилка під час виконання запиту:', error);
+    });
+});
+</script>
+
+</body>
+</html>
